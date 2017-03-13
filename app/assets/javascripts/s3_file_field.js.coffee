@@ -88,8 +88,8 @@ jQuery.fn.S3FileField = (options) ->
   to_s3_filename = (filename) ->
     trimmed = filename.replace(/^\s+|\s+$/g,'')
     strip_before_slash = trimmed.split('\\').slice(-1)[0]
-    double_encode_quote = strip_before_slash.replace('"', '%22')
-    encodeURIComponent(double_encode_quote)
+    remove_special_char = strip_before_slash.replace('/[^a-z0-9\.]/gi, '_')
+    encodeURIComponent(remove_special_char)
 
   build_content_object = (file, result) ->
 
